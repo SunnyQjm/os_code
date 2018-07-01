@@ -3,9 +3,9 @@ CPPFLAGS := -Wall -std=c++11 -g
 
 G11 := ${CPP} ${CPPFLAGS} 
 
-PROGS := testGant fcfs fcfs_test sjf_test sjf srtf_test srtf
+PROGS := testGant fcfs fcfs_test sjf_test sjf srtf_test srtf pf_test
 
-OBJS := testGant.o fcfs.o fcfs_test.o sjf_test.o sjf.o srtf_test.o srtf.o
+OBJS := testGant.o fcfs.o fcfs_test.o sjf_test.o sjf.o srtf_test.o srtf.o pf_test.o
 
 %.o: %.cpp
 	${G11} -c $< -o $@
@@ -31,6 +31,9 @@ srtf_test: srtf_test.o
 	${G11} -o $@ $<
 
 srtf: srtf.o
+	${G11} -o $@ $<
+
+pf_test: pf_test.o
 	${G11} -o $@ $<
 
 clean:
