@@ -1,8 +1,7 @@
 #include "cpu_scheduler.h"
 
-
 int main(){
-    int n;          //the process num;
+    int n;
     list<Process> list;
     while(cin >> n){
         list.clear();
@@ -11,7 +10,7 @@ int main(){
             cin >> p.name >> p.arrivalTime >> p.execTime;
             list.push_back(p);
         }
-        fcfs(list);
+        srtf(list);
     }
     return 0;
 }

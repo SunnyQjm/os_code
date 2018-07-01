@@ -1,4 +1,4 @@
-#include "cpp_scheduler.h"
+#include "cpu_scheduler.h"
 int main(){
     list<Process> q = {
         {"P1", 9, 24}, {"P2", 0, 3}, {"P3", 4, 3}
