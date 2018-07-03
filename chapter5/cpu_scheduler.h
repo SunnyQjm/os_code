@@ -459,3 +459,74 @@ void pf(list<Process> &l){
     cout << endl;
     cout << "-----------------------------------------------------------------" << endl;    
 }
+
+
+/**
+ * 轮转调度算法实现
+ *
+ * timeSlice => 指定时间片的长度
+ */
+void rr(list<Process> &l, int timeSlice){
+    if(l.empty()){
+        cout << "Not Allow Empty" << endl;
+        return;
+    }
+    cout << "-----------------------------------------------------------------" << endl;    
+    //先将用户的输入格式化输出
+    cout << " 输入：" << endl;
+    printFormat(l);
+
+    //先按到来时间排序
+    l.sort(arrivalTimeComparator);
+    
+    //////////////////////////////////////////////////
+    /// 下面这段代码绘制出Gant图
+    //////////////////////////////////////////////////
+    cout << " Gant图：" << endl;
+    
+    queue<Process> q;
+    list<Task> ts;
+    int throughTime = 0;
+    int totalExecTime = 0;
+    
+    Process p = l.front();
+    Task t;
+    t.name = p.name;
+    t.arrivalTime = p.arrivalTime;
+    t.duration = 0;
+    t.remainTime = p.execTime;
+    
+    q.push(p);
+    auto end = l.cend();
+
+    for(auto it = ++l.cbegin(); it != end; it++){
+        Process newP = (*it);
+        while(throughTime < newP.arrivalTime){      //在下一个进程到来之前，反复轮转
+            p = q.front();
+            q.pop();
+            if(p.execTime <= sliceTime && p.execTime <= (newP.arrivalTime - throughTime)){  //可以在下一进程到来前，且在一个时间片内结束
+                t.name = p.name;
+                t.arrivalTime = p.arrivalTime;
+                t.duration = p.execTime;
+                t.remainTime = 0;
+                ts.push_back(t);
+            } else if(p.execTime <= (newP.arrivalTime - throughTime)) {
+                
+            }
+        }
+    }
+
+    for(auto &p : l){
+        totalExecTime += l.execTime;
+        q.push(p);
+    }
+    
+
+    while(!q.empty()){
+        Process p = q.front();
+        q.pop();
+        if(throughTime < p.arrivalTime){    //当前进程
+
+        }
+    }
+}
